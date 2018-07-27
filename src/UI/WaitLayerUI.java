@@ -21,7 +21,7 @@ import javax.swing.plaf.LayerUI;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- public class WaitLayerUI extends LayerUI<JPanel> implements ActionListener {
+ public class WaitLayerUI extends LayerUI<JComponent> implements ActionListener {
   private boolean mIsRunning;
   private boolean mIsFadingOut;
   private Timer mTimer;

@@ -8,21 +8,25 @@ package zsteel;
 import    UI.WaitLayerUI;
 import java.awt.Color;
 import java.awt.Dimension;
-
-import java.awt.Toolkit;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+
+
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyListener;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLayer;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
+import javax.swing.plaf.LayerUI;
 
 /**
  *
@@ -31,31 +35,43 @@ import javax.swing.Timer;
 
 
 @SuppressWarnings("serial")
-public class f_login extends javax.swing.JFrame implements ActionListener, KeyListener {
+public class f_login extends javax.swing.JFrame implements ActionListener, KeyListener, ComponentListener {
  boolean a =false;
- WaitLayerUI layerUI;
-JLayer<JPanel> jlayer;
- Timer stopper;
+      final WaitLayerUI  layerUI = new WaitLayerUI();
+
+
+
     /**
      * Creates new form f_login
+     * @throws java.lang.Exception
      */
-    public f_login() {
+    public f_login()throws Exception{
         initComponents();
+          
+        JLayer  <JComponent> jLayer = new JLayer<JComponent>( this.jPanel1, layerUI);
        
-          layerUI = new WaitLayerUI();
+          try { 
+        new Thread(new Runnable(){
+            public void run() { 
+                
+                EventQueue.invokeLater(new Runnable(){
+                    public void run() { 
+                        layerUI.stop(); 
+                    } 
+                }); 
+            } 
+        }).start();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } 
+        add(jLayer);
+       
+         
     
-  jlayer = new JLayer<JPanel>(jPanel2, layerUI);
     
-   stopper = new Timer(4000, new ActionListener() {
-      public void actionPerformed(ActionEvent ae) {
-        layerUI.stop();
-      }
-    });
-    stopper.setRepeats(false);
 
-    
-  
-        jPanel1.add(jlayer);
+                setIconImage(new ImageIcon(getClass().getResource("/icon/Steel1.png")).getImage());
+
      
 
       
@@ -70,134 +86,76 @@ JLayer<JPanel> jlayer;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jlb_name = new javax.swing.JLabel();
-        jl_pass = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jtx_name = new javax.swing.JTextField();
         jtx_pass = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jlb_name = new javax.swing.JLabel();
+        jl_pass = new javax.swing.JLabel();
         jl_eror = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("zsteel");
         setBounds(new java.awt.Rectangle(400, 130, 20, 400));
 
-        jPanel3.setLayout(new java.awt.CardLayout());
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ring.gif"))); // NOI18N
-
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
-                .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 160, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(121, 121, 121))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
-                .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 139, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(124, 124, 124))
-        );
-
-        jPanel3.add(jPanel2, "card3");
-
-        setIconImage(new ImageIcon(getClass().getResource("/icon/steel1.png")).getImage());
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.addComponentListener(this);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtx_name.addActionListener(this);
+        jPanel1.add(jtx_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 138, 180, 30));
+        jPanel1.add(jtx_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 229, 180, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton1.setText("تسجيل الدخول");
         jButton1.addActionListener(this);
         jButton1.addKeyListener(this);
-
-        jtx_name.addActionListener(this);
-
-        jLabel1.setText("اظهار كلمه السر");
-
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(10, 10, 10)
-                        .add(jlb_name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(8, 8, 8)
-                        .add(jtx_name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 160, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(10, 10, 10)
-                        .add(jl_pass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(8, 8, 8)
-                        .add(jtx_pass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 160, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(196, 196, 196)
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 86, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(159, 159, 159)
-                        .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(159, 159, 159)
-                        .add(jl_eror, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(125, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(143, 143, 143)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jlb_name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jtx_name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(47, 47, 47)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jl_pass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 26, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jtx_pass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(14, 14, 14)
-                .add(jLabel1)
-                .add(59, 59, 59)
-                .add(jButton1)
-                .add(40, 40, 40)
-                .add(jl_eror, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 21, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(jPanel1, "card2");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 335, 132, -1));
+        jPanel1.add(jlb_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 143, 131, 25));
+        jPanel1.add(jl_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 233, 131, 26));
+        jPanel1.add(jl_eror, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 479, 150, 21));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(450, 511));
+        setSize(new java.awt.Dimension(557, 566));
         setLocationRelativeTo(null);
     }
 
     // Code for dispatching events from components to event handlers.
 
     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        if (evt.getSource() == jButton1) {
-            f_login.this.jButton1ActionPerformed(evt);
-        }
-        else if (evt.getSource() == jtx_name) {
+        if (evt.getSource() == jtx_name) {
             f_login.this.jtx_nameActionPerformed(evt);
         }
+        else if (evt.getSource() == jButton1) {
+            f_login.this.jButton1ActionPerformed(evt);
+        }
+    }
+
+    public void componentHidden(java.awt.event.ComponentEvent evt) {
+        if (evt.getSource() == jPanel1) {
+            f_login.this.jPanel1ComponentHidden(evt);
+        }
+    }
+
+    public void componentMoved(java.awt.event.ComponentEvent evt) {
+    }
+
+    public void componentResized(java.awt.event.ComponentEvent evt) {
+    }
+
+    public void componentShown(java.awt.event.ComponentEvent evt) {
     }
 
     public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -214,8 +172,9 @@ JLayer<JPanel> jlayer;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 arror_login();
-         jPanel2.validate();
-        jPanel1.hide();
+        
+ layerUI.start();
+         
         try {
             test_login();
             if(a==false){
@@ -226,13 +185,13 @@ arror_login();
            
                 
         }
-       
          layerUI.start();
-          if (!stopper.isRunning()) {
-            stopper.start();
-          }
-         setVisible(false); 
-     new f_main().setVisible(true);
+
+        setVisible(false);
+        new f_menu().setVisible(true);
+        
+        // setVisible(false); 
+   //  new f_menu().setVisible(true);
      
     
     
@@ -248,10 +207,16 @@ arror_login();
        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1KeyPressed
 
+    private void jPanel1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentHidden
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1ComponentHidden
+
     /**
      * @param args the command line arguments
      */
 
+ @SuppressWarnings("Convert2Lambda")
     public static void main(String args[]) {
     
         try {
@@ -272,8 +237,15 @@ arror_login();
        
            java.awt.EventQueue.invokeLater(new Runnable() {
             
+            @Override
             public void run() {
-                new f_login().setVisible(true);
+                try {
+                    new f_login().layerUI.start();
+                    
+                    new f_login().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(f_login.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
         });
@@ -282,11 +254,7 @@ arror_login();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jl_eror;
     private javax.swing.JLabel jl_pass;
     private javax.swing.JLabel jlb_name;
@@ -330,20 +298,20 @@ private void arror_login ()
                 return a;
             }
     
-             a= a_login.geta_loginname(name);
+             a= c_login.geta_loginname(name);
             if(a==false)
             {
                 jlb_name.setText("اسم الستخدم غير موجود*");
                 return a;
             }
           
-             a = a_login.getpass(pass);
+             a = c_login.getpass(pass);
             if(a == false)
             {
                 jl_pass.setText("كلمه السر غير صحيحه*");
                 return a;
             }
-             a= a_login.getlogin(name, pass);
+             a= c_login.getlogin(name, pass);
        if(a==false){
            jl_eror.setText("تاكد من ادخال البيانات بشكل صحيح");
            return a;

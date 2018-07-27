@@ -509,7 +509,7 @@ public class f_supplier extends javax.swing.JFrame {
     }//GEN-LAST:event_jBaddMouseExited
 
     private void jBaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaddActionPerformed
-        new D_addclient(this, address).setVisible(true);
+        new D_cusaddclient(this, address).setVisible(true);
      //   JLayer<Component> blurLayer = new JLayer<Component>(this.getContentPane(), new BlurLayerUI());
 //setContentPane(blurLayer);
         System.out.println("zsteel.f_custmor.jBaddActionPerformed()");

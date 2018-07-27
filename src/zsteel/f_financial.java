@@ -6,12 +6,18 @@ package zsteel;
 import UI.scrollbar;
 import UI.tableheader;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
 import java.awt.Panel;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import static java.lang.Integer.SIZE;
 import javax.swing.ImageIcon;
-import javax.swing.JLayer;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -34,22 +40,33 @@ public class f_financial extends javax.swing.JFrame {
     
    
     public f_financial() {
-        
+         
        
         initComponents();
          address =true ;
-
+ jcmonth.setVisible(false);
+       jcmonth1.setVisible(false);
+       jpdata1.setVisible(false);
+       jldata1.setVisible(false);
          dtable();
-       
-            jcmonth.setVisible(false);
-             jtfdata1.setVisible(false);
-            jbdata1.setVisible(false);
-             jtfdata.setVisible(true);
-            jbdata.setVisible(true);
+
     selectclient();
-       
+       Rectangle r = getBounds();
+                       Dimension newSize = getBounds().getSize(); 
+                        setSize(newSize);
+jpgroub.setSize(newSize);
+ int h = r.height;
+int w = r.width;
+         setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(getClass().getResource("/icon/steel1.png")).getImage());
-        setExtendedState(MAXIMIZED_BOTH);
+        
+        
+       
+                
+     
+       
+
+        
         table.getTableHeader().setDefaultRenderer(new tableheader());
       /* JTableHeader header = table.getTableHeader();
        header.setPreferredSize(new Dimension(0, 30));
@@ -70,13 +87,15 @@ public class f_financial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateChooser1 = new cambodia.raven.DateChooser();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jpgroub = new javax.swing.JPanel();
         jTserech = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jldata = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -91,7 +110,6 @@ public class f_financial extends javax.swing.JFrame {
         jlb_userlogin = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jtfdata = new javax.swing.JTextField();
         jComboBox4 = new javax.swing.JComboBox<>();
         jcmonth = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
@@ -114,17 +132,42 @@ public class f_financial extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jpdata = new javax.swing.JPanel();
+        jtfdata = new javax.swing.JTextField();
+        jbdata = new javax.swing.JButton();
+        jcmonth1 = new javax.swing.JComboBox<>();
+        jpdata1 = new javax.swing.JPanel();
+        jtfdata9 = new javax.swing.JTextField();
+        jbdata9 = new javax.swing.JButton();
+        jldata1 = new javax.swing.JLabel();
+        jBadd3 = new javax.swing.JButton();
+        jBadd4 = new javax.swing.JButton();
+
+        dateChooser1.setButton(jbdata);
+        dateChooser1.setTextRefernce(jtfdata);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImages(null);
         setSize(new java.awt.Dimension(1340, 750));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
 
         jpgroub.setBackground(new java.awt.Color(255, 255, 255));
+        jpgroub.setFocusCycleRoot(true);
+        jpgroub.setInheritsPopupMenu(true);
         jpgroub.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTserech.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTserech.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jpgroub.add(jTserech, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 400, 30));
+        jTserech.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTserechActionPerformed(evt);
+            }
+        });
+        jpgroub.add(jTserech, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 400, 30));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -172,9 +215,9 @@ public class f_financial extends javax.swing.JFrame {
 
         jpgroub.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("التاريخ");
-        jpgroub.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1178, 23, 50, -1));
+        jldata.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jldata.setText("التاريخ");
+        jpgroub.add(jldata, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 40, 50, -1));
 
         jLabel4.setText("F+");
 
@@ -223,7 +266,7 @@ public class f_financial extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpgroub.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 89, -1, -1));
+        jpgroub.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jScrolltable.getVerticalScrollBar().setUI(new scrollbar());
         jScrolltable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -242,7 +285,7 @@ public class f_financial extends javax.swing.JFrame {
         table.setSurrendersFocusOnKeystroke(true);
         jScrolltable.setViewportView(table);
 
-        jpgroub.add(jScrolltable, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 89, 1220, 470));
+        jpgroub.add(jScrolltable, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 1220, 470));
 
         jBadd.setBackground(new java.awt.Color(250, 250, 250));
         jBadd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Expand Arrow_48px.png"))); // NOI18N
@@ -268,7 +311,7 @@ public class f_financial extends javax.swing.JFrame {
                 jBaddActionPerformed(evt);
             }
         });
-        jpgroub.add(jBadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 599, 100, 80));
+        jpgroub.add(jBadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 599, 100, 80));
 
         jBexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exitaa1.jpg"))); // NOI18N
         jBexit.setBorderPainted(false);
@@ -341,7 +384,7 @@ public class f_financial extends javax.swing.JFrame {
         jpgroub.add(jBprint, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 592, 50, 30));
 
         jlb_userlogin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jpgroub.add(jlb_userlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 697, 87, 17));
+        jpgroub.add(jlb_userlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 700, 87, 17));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -365,14 +408,7 @@ public class f_financial extends javax.swing.JFrame {
                 .addComponent(jLabel6))
         );
 
-        jpgroub.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 697, -1, -1));
-
-        jtfdata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfdataActionPerformed(evt);
-            }
-        });
-        jpgroub.add(jtfdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(676, 23, 110, -1));
+        jpgroub.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 700, -1, -1));
 
         jComboBox4.setBackground(new java.awt.Color(250, 250, 250));
         jComboBox4.setMaximumRowCount(10);
@@ -383,7 +419,7 @@ public class f_financial extends javax.swing.JFrame {
                 jComboBox4ActionPerformed(evt);
             }
         });
-        jpgroub.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1232, 23, 90, -1));
+        jpgroub.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 40, 90, -1));
 
         jcmonth.setBackground(new java.awt.Color(250, 250, 250));
         jcmonth.setMaximumRowCount(12);
@@ -395,7 +431,7 @@ public class f_financial extends javax.swing.JFrame {
                 jcmonthActionPerformed(evt);
             }
         });
-        jpgroub.add(jcmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(1044, 23, 90, -1));
+        jpgroub.add(jcmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 90, -1));
 
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -410,16 +446,16 @@ public class f_financial extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(358, Short.MAX_VALUE)
+                .addContainerGap(364, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(342, 342, 342))
+                .addGap(356, 356, 356))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
-        jpgroub.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 59, -1, -1));
+        jpgroub.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
         jBadd1.setBackground(new java.awt.Color(250, 250, 250));
         jBadd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Maintenance_52px.png"))); // NOI18N
@@ -445,7 +481,7 @@ public class f_financial extends javax.swing.JFrame {
                 jBadd1ActionPerformed(evt);
             }
         });
-        jpgroub.add(jBadd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 599, 100, 80));
+        jpgroub.add(jBadd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1224, 599, 100, 80));
 
         jBadd2.setBackground(new java.awt.Color(250, 250, 250));
         jBadd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Collapse Arrow_48px.png"))); // NOI18N
@@ -471,7 +507,7 @@ public class f_financial extends javax.swing.JFrame {
                 jBadd2ActionPerformed(evt);
             }
         });
-        jpgroub.add(jBadd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 599, 100, 80));
+        jpgroub.add(jBadd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1106, 599, 100, 80));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -673,15 +709,128 @@ public class f_financial extends javax.swing.JFrame {
 
         jpgroub.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 599, -1, -1));
 
+        jpdata.setAutoscrolls(true);
+        jpdata.setOpaque(false);
+        jpdata.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtfdata.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14)); // NOI18N
+        jpdata.add(jtfdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+
+        jbdata.setBorder(null);
+        jbdata.setContentAreaFilled(false);
+        jpdata.add(jbdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 30, 30));
+
+        jpgroub.add(jpdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 40, 150, -1));
+
+        jcmonth1.setBackground(new java.awt.Color(250, 250, 250));
+        jcmonth1.setMaximumRowCount(12);
+        jcmonth1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"يناير","فبراير","مارس","ابريل","مايو","يونيو","يوليو","اغسطس","سبتمبر","اكتوبر" ,"نوفمبر","ديسمبر"})
+        );
+        jcmonth1.setOpaque(false);
+        jcmonth1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmonth1ActionPerformed(evt);
+            }
+        });
+        jpgroub.add(jcmonth1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 90, -1));
+
+        jpdata1.setAutoscrolls(true);
+        jpdata1.setOpaque(false);
+        jpdata1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtfdata9.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14)); // NOI18N
+        jpdata1.add(jtfdata9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+
+        jbdata9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Down_20px.png"))); // NOI18N
+        jbdata9.setBorder(null);
+        jbdata9.setContentAreaFilled(false);
+        jpdata1.add(jbdata9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 30, 30));
+
+        jpgroub.add(jpdata1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 150, -1));
+
+        jldata1.setText("الى");
+        jpgroub.add(jldata1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 50, -1, -1));
+
+        jBadd3.setBackground(new java.awt.Color(250, 250, 250));
+        jBadd3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete_32px.png"))); // NOI18N
+        jBadd3.setText("حدف المعامله نهائيا");
+        jBadd3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jBadd3.setContentAreaFilled(false);
+        jBadd3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBadd3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBadd3.setIconTextGap(3);
+        jBadd3.setInheritsPopupMenu(true);
+        jBadd3.setOpaque(true);
+        jBadd3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jBadd3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBadd3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBadd3MouseExited(evt);
+            }
+        });
+        jBadd3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBadd3ActionPerformed(evt);
+            }
+        });
+        jpgroub.add(jBadd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 610, 100, 60));
+
+        jBadd4.setBackground(new java.awt.Color(250, 250, 250));
+        jBadd4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Paycheque_64px.png"))); // NOI18N
+        jBadd4.setText("عرض تفاصيل المعامله");
+        jBadd4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jBadd4.setContentAreaFilled(false);
+        jBadd4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBadd4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBadd4.setIconTextGap(3);
+        jBadd4.setInheritsPopupMenu(true);
+        jBadd4.setOpaque(true);
+        jBadd4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jBadd4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBadd4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBadd4MouseExited(evt);
+            }
+        });
+        jBadd4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBadd4ActionPerformed(evt);
+            }
+        });
+        jpgroub.add(jBadd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(862, 599, 110, 80));
+
+        jDesktopPane1.setLayer(jpgroub, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jpgroub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpgroub, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpgroub, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpgroub, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -719,10 +868,7 @@ public class f_financial extends javax.swing.JFrame {
     }//GEN-LAST:event_jBexitMouseEntered
 
     private void jBaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaddActionPerformed
-        new D_addclient(this, address).setVisible(true);
-        //   JLayer<Component> blurLayer = new JLayer<Component>(this.getContentPane(), new BlurLayerUI());
-        //setContentPane(blurLayer);
-        System.out.println("zsteel.f_custmor.jBaddActionPerformed()");
+       new D_finaninside(this, true).setVisible(true);
     }//GEN-LAST:event_jBaddActionPerformed
 
     private void jBaddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBaddMouseExited
@@ -755,37 +901,51 @@ public class f_financial extends javax.swing.JFrame {
         
         if(jcomboxselect.equals("عرض باليوم"))
         {
-       
-            
-            jcmonth.setVisible(false);
-             jtfdata1.setVisible(false);
-            jbdata1.setVisible(false);
-             jtfdata.setVisible(true);
-            jbdata.setVisible(true);
+            jldata.setText("التاريخ");
+       jcmonth.setVisible(false);
+       jcmonth1.setVisible(false);
+       jpdata1.setVisible(false);
+       jldata1.setVisible(false);
+                     jpdata.setVisible(true);
+   
+           
         }else if(jcomboxselect.equals("عرض بالشهر"))
         {
+            jldata.setText("التاريخ");
+            jpdata.setVisible(false);
+            jpdata1.setVisible(false);
+            jldata1.setVisible(false);
+         jpgroub.add(jcmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, 90, -1));
+         jpgroub.add(jcmonth1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 40, 90, -1));
 
-            jtfdata.setVisible(false);
-            jbdata.setVisible(false);
-             jtfdata1.setVisible(false);
-            jbdata1.setVisible(false);
             jcmonth.setVisible(true);
+            jcmonth1.setVisible(true);
+            
+
+           
            
         }else if(jcomboxselect.equals("عرض بالسنه"))
         {
-            jtfdata.setVisible(false);
-            jbdata.setVisible(false);
-             jtfdata1.setVisible(false);
-            jbdata1.setVisible(false);
-            jcmonth.setVisible(false);
+           jldata.setText("التاريخ");
+                    jpgroub.add(jcmonth1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, 90, -1));
+
+           jldata1.setVisible(false);
+           
+       jcmonth.setVisible(false);
+       jpdata1.setVisible(false);
+       jldata1.setVisible(false);
+       
+           jcmonth1.setVisible(true);
             
         }else if(jcomboxselect.equals("عرض بالمده"))
         {
+            jldata.setText("التاريخ الى");
+            jldata1.setVisible(true);
             jcmonth.setVisible(false);
-             jtfdata.setVisible(true);
-            jbdata.setVisible(true);
-             jtfdata1.setVisible(true);
-            jbdata1.setVisible(true);
+       jpdata1.setVisible(true);
+      
+       jpdata.setVisible(true);
+           jcmonth1.setVisible(false);
         }
         
         
@@ -795,10 +955,6 @@ public class f_financial extends javax.swing.JFrame {
     private void jcmonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmonthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcmonthActionPerformed
-
-    private void jtfdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfdataActionPerformed
 
     private void jBadd1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd1MouseEntered
         // TODO add your handling code here:
@@ -810,6 +966,7 @@ public class f_financial extends javax.swing.JFrame {
 
     private void jBadd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd1ActionPerformed
         // TODO add your handling code here:
+        new D_finanmanger(this, true).setVisible(true);
     }//GEN-LAST:event_jBadd1ActionPerformed
 
     private void jBadd2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd2MouseEntered
@@ -822,7 +979,62 @@ public class f_financial extends javax.swing.JFrame {
 
     private void jBadd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd2ActionPerformed
         // TODO add your handling code here:
+        new D_finanaddout(this, true).setVisible(true);
     }//GEN-LAST:event_jBadd2ActionPerformed
+
+    private void jcmonth1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmonth1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmonth1ActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+                        Dimension newSize = evt.getComponent().getBounds().getSize(); 
+                        setSize(newSize);
+jpgroub.setSize(newSize);
+jpgroub.putClientProperty(evt, table);
+    jpgroub.putClientProperty("JComponent.sizeVariant", "mini");
+//// small
+//jpgroub.putClientProperty("JComponent.sizeVariant", "small");
+//// large
+//jpgroub.putClientProperty("JComponent.sizeVariant", "large");
+//     //   setSize(newSize);
+            // jScrolltable.setMinimumSize(newSize);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formComponentResized
+
+    private void jTserechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTserechActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTserechActionPerformed
+
+    private void jBadd3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd3MouseEntered
+
+    private void jBadd3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd3MouseExited
+
+    private void jBadd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd3ActionPerformed
+        // TODO add your handling code here:
+        
+        new D_finandelete_table(this, true).setVisible(true);
+        
+    }//GEN-LAST:event_jBadd3ActionPerformed
+
+    private void jBadd4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd4MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd4MouseEntered
+
+    private void jBadd4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd4MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd4MouseExited
+
+    private void jBadd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd4ActionPerformed
+        
+            new D_finanveiw_treatment(this, true).setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd4ActionPerformed
  
     /**
      * @param args the command line arguments
@@ -986,13 +1198,17 @@ public class f_financial extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private cambodia.raven.DateChooser dateChooser1;
     private javax.swing.JButton jBadd;
     private javax.swing.JButton jBadd1;
     private javax.swing.JButton jBadd2;
+    private javax.swing.JButton jBadd3;
+    private javax.swing.JButton jBadd4;
     private javax.swing.JButton jBexit;
     private javax.swing.JButton jBmain;
     private javax.swing.JButton jBprint;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1002,7 +1218,6 @@ public class f_financial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1025,10 +1240,22 @@ public class f_financial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrolltable;
     private javax.swing.JTextField jTserech;
+    private javax.swing.JButton jbdata;
+    private javax.swing.JButton jbdata9;
     private javax.swing.JComboBox<String> jcmonth;
+    private javax.swing.JComboBox<String> jcmonth1;
     public javax.swing.JLabel jlb_userlogin;
+    private javax.swing.JLabel jldata;
+    private javax.swing.JLabel jldata1;
+    private javax.swing.JPanel jpdata;
+    private javax.swing.JPanel jpdata1;
     private javax.swing.JPanel jpgroub;
     private javax.swing.JTextField jtfdata;
+    private javax.swing.JTextField jtfdata9;
     public javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
+
+    private void setExtendedState(Dimension newSize) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

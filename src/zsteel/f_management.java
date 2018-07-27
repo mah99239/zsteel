@@ -46,9 +46,10 @@ jldata2.setVisible(false);
            
     selectclient();
        
-        setIconImage(new ImageIcon(getClass().getResource("/icon/steel1.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/icon/Steel1.png")).getImage());
         setExtendedState(MAXIMIZED_BOTH);
         table.getTableHeader().setDefaultRenderer(new tableheader());
+       // pack();
       /* JTableHeader header = table.getTableHeader();
        header.setPreferredSize(new Dimension(0, 30));
        header.setEnabled(false);
@@ -93,7 +94,6 @@ jldata2.setVisible(false);
         jcbmonth = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jBadd1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -115,7 +115,6 @@ jldata2.setVisible(false);
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jBadd3 = new javax.swing.JButton();
-        jBadd4 = new javax.swing.JButton();
         jComboBox5 = new javax.swing.JComboBox<>();
         jpdata = new javax.swing.JPanel();
         jtfdata = new javax.swing.JTextField();
@@ -125,6 +124,8 @@ jldata2.setVisible(false);
         jbdata1 = new javax.swing.JButton();
         jcbyear = new javax.swing.JComboBox<>();
         jldata2 = new javax.swing.JLabel();
+        jBadd4 = new javax.swing.JButton();
+        jBadd5 = new javax.swing.JButton();
 
         dateChooser1.setButton(jbdata);
         dateChooser1.setTextRefernce(jtfdata);
@@ -135,8 +136,14 @@ jldata2.setVisible(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImages(null);
         setSize(new java.awt.Dimension(1340, 750));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
 
         jpgroub.setBackground(new java.awt.Color(255, 255, 255));
+        jpgroub.setAutoscrolls(true);
         jpgroub.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
@@ -241,7 +248,7 @@ jldata2.setVisible(false);
         jScrolltable.getVerticalScrollBar().setUI(new scrollbar());
         jScrolltable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrolltable.setHorizontalScrollBarPolicy(31);
-        jScrolltable.setOpaque(false);
+        jScrolltable.setAutoscrolls(true);
         jScrolltable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jScrolltableMouseEntered(evt);
@@ -400,34 +407,6 @@ jldata2.setVisible(false);
         );
 
         jpgroub.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 1200, -1));
-
-        jBadd1.setBackground(new java.awt.Color(250, 250, 250));
-        jBadd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete_32px.png"))); // NOI18N
-        jBadd1.setText("اداره المديرين");
-        jBadd1.setToolTipText("");
-        jBadd1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jBadd1.setContentAreaFilled(false);
-        jBadd1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jBadd1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBadd1.setIconTextGap(3);
-        jBadd1.setInheritsPopupMenu(true);
-        jBadd1.setOpaque(true);
-        jBadd1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jBadd1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jBadd1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jBadd1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jBadd1MouseExited(evt);
-            }
-        });
-        jBadd1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBadd1ActionPerformed(evt);
-            }
-        });
-        jpgroub.add(jBadd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 614, 100, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -683,7 +662,7 @@ jldata2.setVisible(false);
 
         jBadd3.setBackground(new java.awt.Color(250, 250, 250));
         jBadd3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Plus Math_32px.png"))); // NOI18N
-        jBadd3.setText("اداره المديرين");
+        jBadd3.setText("اضافه فاتوره جديده");
         jBadd3.setToolTipText("");
         jBadd3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jBadd3.setContentAreaFilled(false);
@@ -707,35 +686,7 @@ jldata2.setVisible(false);
                 jBadd3ActionPerformed(evt);
             }
         });
-        jpgroub.add(jBadd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 614, 100, 60));
-
-        jBadd4.setBackground(new java.awt.Color(250, 250, 250));
-        jBadd4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/View Details_32px.png"))); // NOI18N
-        jBadd4.setText("اداره المديرين");
-        jBadd4.setToolTipText("");
-        jBadd4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jBadd4.setContentAreaFilled(false);
-        jBadd4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jBadd4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBadd4.setIconTextGap(3);
-        jBadd4.setInheritsPopupMenu(true);
-        jBadd4.setOpaque(true);
-        jBadd4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jBadd4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jBadd4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jBadd4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jBadd4MouseExited(evt);
-            }
-        });
-        jBadd4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBadd4ActionPerformed(evt);
-            }
-        });
-        jpgroub.add(jBadd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 614, 100, 60));
+        jpgroub.add(jBadd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 610, 100, 60));
 
         jComboBox5.setBackground(new java.awt.Color(250, 250, 250));
         jComboBox5.setMaximumRowCount(10);
@@ -757,7 +708,6 @@ jldata2.setVisible(false);
         jtfdata.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14)); // NOI18N
         jpdata.add(jtfdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
 
-        jbdata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Down_20px.png"))); // NOI18N
         jbdata.setBorder(null);
         jbdata.setContentAreaFilled(false);
         jpdata.add(jbdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 30, 30));
@@ -773,7 +723,6 @@ jldata2.setVisible(false);
         jtfdata1.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14)); // NOI18N
         jpdata1.add(jtfdata1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
 
-        jbdata1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Down_20px.png"))); // NOI18N
         jbdata1.setBorder(null);
         jbdata1.setContentAreaFilled(false);
         jpdata1.add(jbdata1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 30, 30));
@@ -795,6 +744,58 @@ jldata2.setVisible(false);
         jldata2.setText("الى");
         jpgroub.add(jldata2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, -1, -1));
 
+        jBadd4.setBackground(new java.awt.Color(250, 250, 250));
+        jBadd4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete_32px.png"))); // NOI18N
+        jBadd4.setText("حدف المعامله نهائيا");
+        jBadd4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jBadd4.setContentAreaFilled(false);
+        jBadd4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBadd4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBadd4.setIconTextGap(3);
+        jBadd4.setInheritsPopupMenu(true);
+        jBadd4.setOpaque(true);
+        jBadd4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jBadd4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBadd4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBadd4MouseExited(evt);
+            }
+        });
+        jBadd4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBadd4ActionPerformed(evt);
+            }
+        });
+        jpgroub.add(jBadd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 610, 100, 60));
+
+        jBadd5.setBackground(new java.awt.Color(250, 250, 250));
+        jBadd5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Paycheque_64px.png"))); // NOI18N
+        jBadd5.setText("عرض تفاصيل المعامله");
+        jBadd5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jBadd5.setContentAreaFilled(false);
+        jBadd5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBadd5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBadd5.setIconTextGap(3);
+        jBadd5.setInheritsPopupMenu(true);
+        jBadd5.setOpaque(true);
+        jBadd5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jBadd5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBadd5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBadd5MouseExited(evt);
+            }
+        });
+        jBadd5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBadd5ActionPerformed(evt);
+            }
+        });
+        jpgroub.add(jBadd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 600, 110, 80));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -803,7 +804,7 @@ jldata2.setVisible(false);
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpgroub, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpgroub, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -869,18 +870,6 @@ jldata.setText("التاريخ");
         }
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
-    private void jBadd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBadd4ActionPerformed
-
-    private void jBadd4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd4MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBadd4MouseExited
-
-    private void jBadd4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd4MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBadd4MouseEntered
-
     private void jBadd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBadd3ActionPerformed
@@ -892,18 +881,6 @@ jldata.setText("التاريخ");
     private void jBadd3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd3MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jBadd3MouseEntered
-
-    private void jBadd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBadd1ActionPerformed
-
-    private void jBadd1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBadd1MouseExited
-
-    private void jBadd1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBadd1MouseEntered
 
     private void jcbmonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmonthActionPerformed
         // TODO add your handling code here:
@@ -959,6 +936,40 @@ jldata.setText("التاريخ");
     private void jcbyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbyearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbyearActionPerformed
+
+    private void jBadd4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd4MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd4MouseEntered
+
+    private void jBadd4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd4MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd4MouseExited
+
+    private void jBadd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd4ActionPerformed
+        // TODO add your handling code here:
+
+        new D_finandelete_table(this, true).setVisible(true);
+
+    }//GEN-LAST:event_jBadd4ActionPerformed
+
+    private void jBadd5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd5MouseEntered
+
+    private void jBadd5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBadd5MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd5MouseExited
+
+    private void jBadd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBadd5ActionPerformed
+
+        new D_finanveiw_treatment(this, true).setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBadd5ActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formComponentResized
  
     /**
      * @param args the command line arguments
@@ -1124,9 +1135,9 @@ jldata.setText("التاريخ");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private cambodia.raven.DateChooser dateChooser1;
     private cambodia.raven.DateChooser dateChooser2;
-    private javax.swing.JButton jBadd1;
     private javax.swing.JButton jBadd3;
     private javax.swing.JButton jBadd4;
+    private javax.swing.JButton jBadd5;
     private javax.swing.JButton jBexit;
     private javax.swing.JButton jBmain;
     private javax.swing.JButton jBprint;
